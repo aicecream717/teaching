@@ -1,13 +1,10 @@
+'''Author Shan Jiang (aicecream717)'''
 
 import pygame,pyautogui
 import time,os,datetime
 from GUIHandler import *
 
-# --- main_old ---
 
-
-
-# - init -
 GUI=GUIHandler()
 running = True
 msg_dic={}
@@ -17,9 +14,6 @@ starting_minute=datetime.datetime.now().minute
 starting_hour=datetime.datetime.now().hour
 
 while running:
-
-    # - events -
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -37,13 +31,12 @@ while running:
     
     if time.perf_counter()-start_time>5:
         current=pyautogui.position()
+        #You need to change the x,y values so that your mouse move to the save chat button on Zoom chat box
         pyautogui.click(x=2260,y=315)
         pyautogui.click(x=2260,y=335)
         pyautogui.click(x=current[0],y=current[1])
-        #pyautogui.moveTo(1900, 320, duration = 0.5) 
         start_time=time.perf_counter()
    
-    # - draws (without updates) -
     
     try:
         files=os.listdir("livechats")
@@ -63,7 +56,6 @@ while running:
             f.close()
     except:
         pass
-    #GUI.screen.blit(GUI.background,(0,0))
 
     msgs=[]
     current_sec=-1
@@ -80,6 +72,5 @@ while running:
         float_display(msgs)
     GUI.clock.tick(FPS)
 
-# - end -
 
 pygame.quit()
